@@ -141,6 +141,72 @@ THREE.Matrix4 = function () {
 		return m;
 
 	};
+	
+	/**
+	 * scales this matrix by the scalar value a
+	 */
+	this.scale = function(a) {
+	  this.n11 *= a;
+	  this.n12 *= a;
+	  this.n13 *= a;
+	  this.n14 *= a;
+	  
+	  this.n21 *= a;
+	  this.n22 *= a;
+	  this.n23 *= a;
+	  this.n24 *= a;
+	  
+	  this.n31 *= a;
+	  this.n32 *= a;
+	  this.n33 *= a;
+	  this.n34 *= a;
+	  
+	  this.n41 *= a;
+	  this.n42 *= a;
+	  this.n43 *= a;
+	  this.n44 *= a;
+	}
+	
+	/**
+	 * returns the determinant of this matrix
+	 */
+	this.det = function() {
+
+		//TODO: please make this more efficient
+		//( based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm )
+		return (
+		this.n14 * this.n23 * this.n32 * this.n41-
+		this.n13 * this.n24 * this.n32 * this.n41-
+		this.n14 * this.n22 * this.n33 * this.n41+
+		this.n12 * this.n24 * this.n33 * this.n41+
+
+		this.n13 * this.n22 * this.n34 * this.n41-
+		this.n12 * this.n23 * this.n34 * this.n41-
+		this.n14 * this.n23 * this.n31 * this.n42+
+		this.n13 * this.n24 * this.n31 * this.n42+
+
+		this.n14 * this.n21 * this.n33 * this.n42-
+		this.n11 * this.n24 * this.n33 * this.n42-
+		this.n13 * this.n21 * this.n34 * this.n42+
+		this.n11 * this.n23 * this.n34 * this.n42+
+
+		this.n14 * this.n22 * this.n31 * this.n43-
+		this.n12 * this.n24 * this.n31 * this.n43-
+		this.n14 * this.n21 * this.n32 * this.n43+
+		this.n11 * this.n24 * this.n32 * this.n43+
+
+		this.n12 * this.n21 * this.n34 * this.n43-
+		this.n11 * this.n22 * this.n34 * this.n43-
+		this.n13 * this.n22 * this.n31 * this.n44+
+		this.n12 * this.n23 * this.n31 * this.n44+
+
+		this.n13 * this.n21 * this.n32 * this.n44-
+		this.n11 * this.n23 * this.n32 * this.n44-
+		this.n12 * this.n21 * this.n33 * this.n44+
+		this.n11 * this.n22 * this.n33 * this.n44);
+
+	}
+
 
 	this.toString = function() {
 
@@ -152,6 +218,33 @@ THREE.Matrix4 = function () {
 	};
 
 };
+
+THREE.Matrix4.makeInvert = function(m1) {
+
+	//TODO: please make this more efficient
+	//( based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm )
+	var m2 = new THREE.Matrix4();
+	m2.n11 = m1.n23*m1.n34*m1.n42 - m1.n24*m1.n33*m1.n42 + m1.n24*m1.n32*m1.n43 - m1.n22*m1.n34*m1.n43 - m1.n23*m1.n32*m1.n44 + m1.n22*m1.n33*m1.n44;
+	m2.n12 = m1.n14*m1.n33*m1.n42 - m1.n13*m1.n34*m1.n42 - m1.n14*m1.n32*m1.n43 + m1.n12*m1.n34*m1.n43 + m1.n13*m1.n32*m1.n44 - m1.n12*m1.n33*m1.n44;
+	m2.n13 = m1.n13*m1.n24*m1.n42 - m1.n14*m1.n23*m1.n42 + m1.n14*m1.n22*m1.n43 - m1.n12*m1.n24*m1.n43 - m1.n13*m1.n22*m1.n44 + m1.n12*m1.n23*m1.n44;
+	m2.n14 = m1.n14*m1.n23*m1.n32 - m1.n13*m1.n24*m1.n32 - m1.n14*m1.n22*m1.n33 + m1.n12*m1.n24*m1.n33 + m1.n13*m1.n22*m1.n34 - m1.n12*m1.n23*m1.n34;
+	m2.n21 = m1.n24*m1.n33*m1.n41 - m1.n23*m1.n34*m1.n41 - m1.n24*m1.n31*m1.n43 + m1.n21*m1.n34*m1.n43 + m1.n23*m1.n31*m1.n44 - m1.n21*m1.n33*m1.n44;
+	m2.n22 = m1.n13*m1.n34*m1.n41 - m1.n14*m1.n33*m1.n41 + m1.n14*m1.n31*m1.n43 - m1.n11*m1.n34*m1.n43 - m1.n13*m1.n31*m1.n44 + m1.n11*m1.n33*m1.n44;
+	m2.n23 = m1.n14*m1.n23*m1.n41 - m1.n13*m1.n24*m1.n41 - m1.n14*m1.n21*m1.n43 + m1.n11*m1.n24*m1.n43 + m1.n13*m1.n21*m1.n44 - m1.n11*m1.n23*m1.n44;
+	m2.n24 = m1.n13*m1.n24*m1.n31 - m1.n14*m1.n23*m1.n31 + m1.n14*m1.n21*m1.n33 - m1.n11*m1.n24*m1.n33 - m1.n13*m1.n21*m1.n34 + m1.n11*m1.n23*m1.n34;
+	m2.n31 = m1.n22*m1.n34*m1.n41 - m1.n24*m1.n32*m1.n41 + m1.n24*m1.n31*m1.n42 - m1.n21*m1.n34*m1.n42 - m1.n22*m1.n31*m1.n44 + m1.n21*m1.n32*m1.n44;
+	m2.n32 = m1.n14*m1.n32*m1.n41 - m1.n12*m1.n34*m1.n41 - m1.n14*m1.n31*m1.n42 + m1.n11*m1.n34*m1.n42 + m1.n12*m1.n31*m1.n44 - m1.n11*m1.n32*m1.n44;
+	m2.n33 = m1.n13*m1.n24*m1.n41 - m1.n14*m1.n22*m1.n41 + m1.n14*m1.n21*m1.n42 - m1.n11*m1.n24*m1.n42 - m1.n12*m1.n21*m1.n44 + m1.n11*m1.n22*m1.n44;
+	m2.n34 = m1.n14*m1.n22*m1.n31 - m1.n12*m1.n24*m1.n31 - m1.n14*m1.n21*m1.n32 + m1.n11*m1.n24*m1.n32 + m1.n12*m1.n21*m1.n34 - m1.n11*m1.n22*m1.n34;
+	m2.n41 = m1.n23*m1.n32*m1.n41 - m1.n22*m1.n33*m1.n41 - m1.n23*m1.n31*m1.n42 + m1.n21*m1.n33*m1.n42 + m1.n22*m1.n31*m1.n43 - m1.n21*m1.n32*m1.n43;
+	m2.n42 = m1.n12*m1.n33*m1.n41 - m1.n13*m1.n32*m1.n41 + m1.n13*m1.n31*m1.n42 - m1.n11*m1.n33*m1.n42 - m1.n12*m1.n31*m1.n43 + m1.n11*m1.n32*m1.n43;
+	m2.n43 = m1.n13*m1.n22*m1.n41 - m1.n12*m1.n23*m1.n41 - m1.n13*m1.n21*m1.n42 + m1.n11*m1.n23*m1.n42 + m1.n12*m1.n21*m1.n43 - m1.n11*m1.n22*m1.n43;
+	m2.n44 = m1.n12*m1.n23*m1.n31 - m1.n13*m1.n22*m1.n31 + m1.n13*m1.n21*m1.n32 - m1.n11*m1.n23*m1.n32 - m1.n12*m1.n21*m1.n33 + m1.n11*m1.n22*m1.n33;
+	m2.scale(1/m1.det());
+
+	return m2;
+	
+}
 
 THREE.Matrix4.translationMatrix = function ( x, y, z ) {
 

@@ -233,6 +233,11 @@ THREE.Renderer = function() {
 		}
 
 		this.renderList.sort( painterSort );
+		
+		//cleaning up all the update children flags for next render
+		for ( i = 0; i < scene.objects.length; i++ ) {
+			scene.objects[i].updateChildren = false;
+		}
 
 	};
 
