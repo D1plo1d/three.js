@@ -45,8 +45,8 @@ THREE.Object3D = function ( material ) {
 		this.matrix.multiplySelf( THREE.Matrix4.rotationYMatrix( this.rotation.y ) );
 		this.matrix.multiplySelf( THREE.Matrix4.rotationZMatrix( this.rotation.z ) );
 		//Center of Rotation offsets
-		if (this.centerOfRotation.x != 0 && this.centerOfRotation.y != 0 && this.centerOfRotation.z != 0)
-		  this.matrix.multiplySelf( THREE.Matrix4.translationMatrix( -this.centerOfRotation.x, -this.centerOfRotation.y, -this.centerOfRotation.z ) );
+		if (this.centerOfRotation.x != 0 || this.centerOfRotation.y != 0 || this.centerOfRotation.z != 0)
+			this.matrix.multiplySelf( THREE.Matrix4.translationMatrix( -this.centerOfRotation.x, -this.centerOfRotation.y, -this.centerOfRotation.z ) );
 		//Scaling
 		this.matrix.multiplySelf( THREE.Matrix4.scaleMatrix( this.scale.x, this.scale.y, this.scale.z ) );
 
