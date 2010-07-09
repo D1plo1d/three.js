@@ -76,7 +76,55 @@ THREE.CanvasRenderer = function () {
 
 			_context.beginPath();
 
-			if ( element instanceof THREE.RenderableParticle ) {
+			if ( element instanceof THREE.RenderableText ) {
+
+				v1x = element.x * _widthHalf; v1y = element.y * _heightHalf;
+				//TODO: real text meta data-based size
+				size = 100 * _widthHalf;
+
+				_bboxRect.set( v1x - size, v1y - size, v1x + size, v1y + size );
+
+				if ( !_clipRect.instersects( _bboxRect ) ) {
+
+					continue;
+
+				}
+
+
+		  	_context.font = element.font;
+		  	
+				// text material hack to work with the lack of text path support in 
+				// the html5 spec
+				for ( j = 0; j < materialLength; j++ ) {
+
+					material = element.material[ j ];
+
+					if ( material instanceof THREE.ColorFillMaterial ) {
+
+						_context.fillStyle = material.color.__styleString;
+				  	_context.fillText(element.text, v1x, v1y);
+
+					} else if ( material instanceof THREE.ColorStrokeMaterial ) {
+
+						_context.lineWidth = material.lineWidth;
+						_context.lineJoin = "round";
+						_context.lineCap = "round";
+
+						_context.strokeStyle = material.color.__styleString;
+				  	_context.strokeText(element.text, v1x, v1y);
+						_bboxRect.inflate( _context.lineWidth );
+
+					}
+
+				}
+
+				//TODO: text camera transforms (skewing and rotation for 3d text)
+				if (element.context == "3d")
+				{
+					
+				}
+
+			} else if ( element instanceof THREE.RenderableParticle ) {
 
 				v1x = element.x * _widthHalf; v1y = element.y * _heightHalf;
 				size = element.size * _widthHalf;

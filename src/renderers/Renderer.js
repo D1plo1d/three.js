@@ -201,7 +201,8 @@ THREE.Renderer = function() {
 
 				vector4.set( object.position.x, object.position.y, object.position.z, 1 );
 
-				camera.matrix.transform( vector4 );
+				matrix.multiply( camera.matrix, object.matrix );
+				matrix.transform( vector4 );
 				camera.projectionMatrix.transform( vector4 );
 
 				object.screen.set( vector4.x / vector4.w, vector4.y / vector4.w, vector4.z / vector4.w );
@@ -210,7 +211,8 @@ THREE.Renderer = function() {
 
 					if ( !particlePool[ particleCount ] ) {
 
-						particlePool[ particleCount ] = new THREE.RenderableParticle();
+						particlePool[ particleCount ] = (object instanceof THREE.Text)? 
+									new THREE.RenderableText() : new THREE.RenderableParticle();
 
 					}
 
@@ -221,6 +223,14 @@ THREE.Renderer = function() {
 					particlePool[ particleCount ].size = object.size * Math.abs( vector4.x / vector4.w - ( vector4.x + camera.projectionMatrix.n11 ) / ( vector4.w + camera.projectionMatrix.n14 ) );
 					particlePool[ particleCount ].material = object.material;
 					particlePool[ particleCount ].color = object.color;
+
+					if (object instanceof THREE.Text)
+					{
+						particlePool[ particleCount ].text = object.text;
+						particlePool[ particleCount ].font = object.font;
+						particlePool[ particleCount ].context = object.context;
+						particlePool[ particleCount ].fontScaling = object.fontScaling;
+					}
 
 					this.renderList.push( particlePool[particleCount] );
 

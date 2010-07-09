@@ -81,35 +81,37 @@ This code creates a camera, then creates a scene object, adds a bunch of random 
 
 For creating a customised version of the library, including the source files in this order would be a good way to start:
 
-	<script type="text/javascript" src="js/three/Three.js"></script>
-	<script type="text/javascript" src="js/three/core/Color.js"></script>
-	<script type="text/javascript" src="js/three/core/Vector2.js"></script>
-	<script type="text/javascript" src="js/three/core/Vector3.js"></script>
-	<script type="text/javascript" src="js/three/core/Vector4.js"></script>
-	<script type="text/javascript" src="js/three/core/Rectangle.js"></script>
-	<script type="text/javascript" src="js/three/core/Matrix4.js"></script>
-	<script type="text/javascript" src="js/three/core/Vertex.js"></script>
-	<script type="text/javascript" src="js/three/core/Face3.js"></script>
-	<script type="text/javascript" src="js/three/core/Face4.js"></script>
-	<script type="text/javascript" src="js/three/core/Geometry.js"></script>
-	<script type="text/javascript" src="js/three/cameras/Camera.js"></script>
-	<script type="text/javascript" src="js/three/objects/Object3D.js"></script>
-	<script type="text/javascript" src="js/three/objects/Mesh.js"></script>
-	<script type="text/javascript" src="js/three/objects/Particle.js"></script>
-	<script type="text/javascript" src="js/three/objects/Line.js"></script>
-	<script type="text/javascript" src="js/three/materials/BitmapUVMappingMaterial.js"></script>
-	<script type="text/javascript" src="js/three/materials/ColorFillMaterial.js"></script>
-	<script type="text/javascript" src="js/three/materials/ColorStrokeMaterial.js"></script>
-	<script type="text/javascript" src="js/three/materials/FaceColorFillMaterial.js"></script>
-	<script type="text/javascript" src="js/three/materials/FaceColorStrokeMaterial.js"></script>
-	<script type="text/javascript" src="js/three/scenes/Scene.js"></script>
-	<script type="text/javascript" src="js/three/renderers/Renderer.js"></script>
-	<script type="text/javascript" src="js/three/renderers/CanvasRenderer.js"></script>
-	<script type="text/javascript" src="js/three/renderers/SVGRenderer.js"></script>
-	<script type="text/javascript" src="js/three/renderers/renderables/RenderableFace3.js"></script>
-	<script type="text/javascript" src="js/three/renderers/renderables/RenderableFace4.js"></script>
-	<script type="text/javascript" src="js/three/renderers/renderables/RenderableParticle.js"></script>
-	<script type="text/javascript" src="js/three/renderers/renderables/RenderableLine.js"></script>
+	<script type="text/javascript" src="js/repo/src/Three.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Color.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Vector2.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Vector3.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Vector4.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Rectangle.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Matrix4.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Vertex.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Face3.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Face4.js"></script>
+	<script type="text/javascript" src="js/repo/src/core/Geometry.js"></script>
+	<script type="text/javascript" src="js/repo/src/cameras/Camera.js"></script>
+	<script type="text/javascript" src="js/repo/src/objects/Object3D.js"></script>
+	<script type="text/javascript" src="js/repo/src/objects/Mesh.js"></script>
+	<script type="text/javascript" src="js/repo/src/objects/Particle.js"></script>
+	<script type="text/javascript" src="js/repo/src/objects/Text.js"></script>
+	<script type="text/javascript" src="js/repo/src/objects/Line.js"></script>
+	<script type="text/javascript" src="js/repo/src/materials/BitmapUVMappingMaterial.js"></script>
+	<script type="text/javascript" src="js/repo/src/materials/ColorFillMaterial.js"></script>
+	<script type="text/javascript" src="js/repo/src/materials/ColorStrokeMaterial.js"></script>
+	<script type="text/javascript" src="js/repo/src/materials/FaceColorFillMaterial.js"></script>
+	<script type="text/javascript" src="js/repo/src/materials/FaceColorStrokeMaterial.js"></script>
+	<script type="text/javascript" src="js/repo/src/scenes/Scene.js"></script>
+	<script type="text/javascript" src="js/repo/src/renderers/Renderer.js"></script>
+	<script type="text/javascript" src="js/repo/src/renderers/CanvasRenderer.js"></script>
+	<script type="text/javascript" src="js/repo/src/renderers/SVGRenderer.js"></script>
+	<script type="text/javascript" src="js/repo/src/renderers/renderables/RenderableFace3.js"></script>
+	<script type="text/javascript" src="js/repo/src/renderers/renderables/RenderableFace4.js"></script>
+	<script type="text/javascript" src="js/repo/src/renderers/renderables/RenderableParticle.js"></script>
+	<script type="text/javascript" src="js/repo/src/renderers/renderables/RenderableLine.js"></script>    
+	<script type="text/javascript" src="js/repo/src/renderers/renderables/RenderableText.js"></script>
 
 
 ### Contributors ###
