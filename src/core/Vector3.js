@@ -9,11 +9,21 @@ THREE.Vector3 = function ( x, y, z ) {
 	this.y = y || 0;
 	this.z = z || 0;
 
+	this.setScalar = function ( s ) {
+
+		this.x = s;
+		this.y = s;
+		this.z = s;
+		return this;
+
+	};
+
 	this.set = function ( x, y, z ) {
 
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		return this;
 
 	};
 
@@ -22,6 +32,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x = v.x;
 		this.y = v.y;
 		this.z = v.z;
+		return this;
 
 	};
 
@@ -30,6 +41,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x = v1.x + v2.x;
 		this.y = v1.y + v2.y;
 		this.z = v1.z + v2.z;
+		return this;
 
 	};
 
@@ -38,6 +50,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x += v.x;
 		this.y += v.y;
 		this.z += v.z;
+		return this;
 
 	};
 
@@ -46,6 +59,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x += s;
 		this.y += s;
 		this.z += s;
+		return this;
 
 	};
 
@@ -54,6 +68,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x = v1.x - v2.x;
 		this.y = v1.y - v2.y;
 		this.z = v1.z - v2.z;
+		return this;
 
 	};
 
@@ -62,6 +77,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x -= v.x;
 		this.y -= v.y;
 		this.z -= v.z;
+		return this;
 
 	};
 
@@ -70,6 +86,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x = v1.y * v2.z - v1.z * v2.y;
 		this.y = v1.z * v2.x - v1.x * v2.z;
 		this.z = v1.x * v2.y - v1.y * v2.x;
+		return this;
 
 	};
 
@@ -80,6 +97,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x = ty * v.z - tz * v.y;
 		this.y = tz * v.x - tx * v.z;
 		this.z = tx * v.y - ty * v.x;
+		return this;
 
 	};
 
@@ -88,6 +106,8 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x *= v.x;
 		this.y *= v.y;
 		this.z *= v.z;
+		return this;
+
 	};
 
 	this.multiplyScalar = function ( s ) {
@@ -95,6 +115,7 @@ THREE.Vector3 = function ( x, y, z ) {
 		this.x *= s;
 		this.y *= s;
 		this.z *= s;
+		return this;
 
 	};
 

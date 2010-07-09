@@ -15,6 +15,7 @@ THREE.Vector4 = function ( x, y, z, w ) {
 		this.y = y;
 		this.z = z;
 		this.w = w;
+		return this;
 
 	};
 
@@ -24,6 +25,7 @@ THREE.Vector4 = function ( x, y, z, w ) {
 		this.y = v.y;
 		this.z = v.z;
 		this.w = v.w;
+		return this;
 
 	};
 
@@ -33,6 +35,7 @@ THREE.Vector4 = function ( x, y, z, w ) {
 		this.y = v1.y + v2.y;
 		this.z = v1.z + v2.z;
 		this.w = v1.w + v2.w;
+		return this;
 
 	};
 
@@ -42,6 +45,7 @@ THREE.Vector4 = function ( x, y, z, w ) {
 		this.y += v.y;
 		this.z += v.z;
 		this.w += v.w;
+		return this;
 
 	};
 
@@ -51,6 +55,7 @@ THREE.Vector4 = function ( x, y, z, w ) {
 		this.y = v1.y - v2.y;
 		this.z = v1.z - v2.z;
 		this.w = v1.w - v2.w;
+		return this;
 
 	};
 
@@ -60,8 +65,20 @@ THREE.Vector4 = function ( x, y, z, w ) {
 		this.y -= v.y;
 		this.z -= v.z;
 		this.w -= v.w;
+		return this;
 
 	};
+
+	this.multiplyScalar = function ( s ) {
+
+		this.x *= s;
+		this.y *= s;
+		this.z *= s;
+		this.w *= s;
+		return this;
+
+	};
+
 
 	this.clone = function () {
 

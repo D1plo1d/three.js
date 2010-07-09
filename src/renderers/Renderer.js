@@ -163,11 +163,19 @@ THREE.Renderer = function() {
 				for ( j = 0; j < verticesLength; j++ ) {
 
 					vertex = object.geometry.vertices[ j ];
+
+					vector4.copy( vertex.position ).addSelf( object.position ).w = 1;
+
+					matrix.transform( vector4 );
+					camera.projectionMatrix.transform( vector4 );
+					
+					vertex.screen.copy(vector4).multiplyScalar( 1 / vector4.w );
+/*
 					vertex.screen.copy( vertex.position );
 
 					matrix.transform( vertex.screen );
 					camera.projectionMatrix.transform( vertex.screen );
-
+*/
 					vertex.__visible = vertex.screen.z > 0 && vertex.screen.z < 1;
 
 					if ( j > 0 ) {
@@ -199,13 +207,13 @@ THREE.Renderer = function() {
 
 			} else if ( object instanceof THREE.Particle ) {
 
-				vector4.set( object.position.x, object.position.y, object.position.z, 1 );
+				vector4.copy( object.position ).w = 1;
 
 				matrix.multiply( camera.matrix, object.matrix );
 				matrix.transform( vector4 );
 				camera.projectionMatrix.transform( vector4 );
 
-				object.screen.set( vector4.x / vector4.w, vector4.y / vector4.w, vector4.z / vector4.w );
+				object.screen.copy(vector4).multiplyScalar( 1 / vector4.w );
 
 				if ( object.screen.z > 0 && object.screen.z < 1 ) {
 
@@ -226,10 +234,13 @@ THREE.Renderer = function() {
 
 					if (object instanceof THREE.Text)
 					{
+						var scale = object.scale.clone();
+						if (object.fontScaling == true) scale.multiplyScalar(1/vector4.w);
+						
 						particlePool[ particleCount ].text = object.text;
 						particlePool[ particleCount ].font = object.font;
 						particlePool[ particleCount ].context = object.context;
-						particlePool[ particleCount ].fontScaling = object.fontScaling;
+						particlePool[ particleCount ].scale = scale;
 					}
 
 					this.renderList.push( particlePool[particleCount] );

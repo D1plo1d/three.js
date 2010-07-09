@@ -79,8 +79,7 @@ THREE.CanvasRenderer = function () {
 			if ( element instanceof THREE.RenderableText ) {
 
 				v1x = element.x * _widthHalf; v1y = element.y * _heightHalf;
-				//TODO: real text meta data-based size
-				size = 100 * _widthHalf;
+				size = _context.measureText(element.text).width * _widthHalf;
 
 				_bboxRect.set( v1x - size, v1y - size, v1x + size, v1y + size );
 
@@ -90,8 +89,19 @@ THREE.CanvasRenderer = function () {
 
 				}
 
+				_context.save();
 
 		  	_context.font = element.font;
+
+				_context.scale(element.scale.x, element.scale.y);
+
+				//TODO: text camera transforms (skewing and rotation for 3d text)
+				if (element.context == "3d")
+				{
+					
+				}
+
+				_context.translate(v1x/element.scale.x, v1y/element.scale.y);
 		  	
 				// text material hack to work with the lack of text path support in 
 				// the html5 spec
@@ -102,7 +112,7 @@ THREE.CanvasRenderer = function () {
 					if ( material instanceof THREE.ColorFillMaterial ) {
 
 						_context.fillStyle = material.color.__styleString;
-				  	_context.fillText(element.text, v1x, v1y);
+				  	_context.fillText(element.text, 0, 0);
 
 					} else if ( material instanceof THREE.ColorStrokeMaterial ) {
 
@@ -111,18 +121,14 @@ THREE.CanvasRenderer = function () {
 						_context.lineCap = "round";
 
 						_context.strokeStyle = material.color.__styleString;
-				  	_context.strokeText(element.text, v1x, v1y);
+				  	_context.strokeText(element.text, 0, 0);
 						_bboxRect.inflate( _context.lineWidth );
 
 					}
 
 				}
 
-				//TODO: text camera transforms (skewing and rotation for 3d text)
-				if (element.context == "3d")
-				{
-					
-				}
+				_context.restore();
 
 			} else if ( element instanceof THREE.RenderableParticle ) {
 

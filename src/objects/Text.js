@@ -12,6 +12,18 @@ THREE.Text = function ( text, material ) {
 	this.fontScaling = true;
 	/** 3d or 2d. 2d draws the text always flat on the screen, 3d skews and rotates the text with it's orientation in 3d space */
 	this.context = "3d";
+	
+	this.getWidth = function()
+	{
+		//TODO: placeholder
+		return 1.2;
+	}
+
+	this.getHeight = function()
+	{
+		//TODO: placeholder
+		return 0.5;
+	}
 
 };
 

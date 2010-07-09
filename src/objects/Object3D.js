@@ -55,8 +55,10 @@ THREE.Object3D = function ( material ) {
 	this.childTranslationMatrix = function(cx, cy, cz) {
 
 		this.updateMatrix();
-		m = THREE.Matrix4.translationMatrix(cx, cy, cz);
-		m.multiplySelf(this.matrix);
+//		m = THREE.Matrix4.translationMatrix(cx, cy, cz);
+//		m.multiplySelf(this.matrix);
+		m = this.matrix.clone();
+		m.multiplySelf( THREE.Matrix4.translationMatrix(cx, cy, cz) );
 		return m;
 
 	};
